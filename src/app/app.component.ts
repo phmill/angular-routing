@@ -10,6 +10,7 @@ import {
   NavigationCancel
 } from '@angular/router';
 import { slideInAnimation } from './app.animation';
+import { MessageService } from './messages/message.service';
 
 @Component({
   selector: "pm-root",
@@ -32,7 +33,15 @@ export class AppComponent {
     return "";
   }
 
-  constructor(private authService: AuthService, private router: Router) {
+  get isDisplayed(): boolean {
+    return this.messageService.isDisplayed;
+  }
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private messageService:MessageService
+    ) {
     router.events.subscribe((routerEvent: Event) => {
       this.checkRouterEvent(routerEvent);
     });
@@ -55,6 +64,15 @@ export class AppComponent {
       routerEvent instanceof NavigationCancel) {
         this.loading = false;
       }
+  }
 
+  displayMessages(): void {
+    this.router.navigate([{ outlets: { popup: ['messages'] } }]);
+    this.messageService.isDisplayed = true;
+  }
+
+  hideMessages(): void {
+    this.router.navigate([{ outlets: { popup: null } }]);
+    this.messageService.isDisplayed = false;
   }
 }
