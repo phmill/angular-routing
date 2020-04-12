@@ -12,12 +12,10 @@ import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 
 /* Feature Modules */
-import { AppRoutingModule } from "./user/app-routing.module";
+import { AppRoutingModule } from "./app-routing.module";
 
-import { ProductModule } from './products/product.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
-import { from } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -25,7 +23,6 @@ import { from } from 'rxjs';
     BrowserAnimationsModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
-    ProductModule,
     UserModule,
     MessageModule,
     AppRoutingModule
